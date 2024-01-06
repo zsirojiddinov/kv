@@ -2,11 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kv/models/kv_models.dart';
 
 import 'kv_event.dart';
 import 'kv_state.dart';
 
 class KvBloc extends Bloc<KvEvent, KvState> {
+  var listUser = <KvUser>[];
+  var listCheckBox = <KvUser>[];
+
   String AkbarAli = "AkbarAli";
   String Avaz = "Avaz";
   String Diyor = "Diyor";
@@ -27,20 +31,32 @@ class KvBloc extends Bloc<KvEvent, KvState> {
 
   late String payPerson;
 
-  List<String> listCheckBox = [];
-
   var summaController = TextEditingController();
 
   KvBloc() : super(SuccesState()) {
+    listUser = [
+      KvUser(name: AkbarAli),
+      KvUser(name: Avaz),
+      KvUser(name: Davron),
+      KvUser(name: Qobiljon),
+      KvUser(name: Usmonjon),
+      KvUser(name: Diyor),
+      KvUser(name: Farrux),
+      KvUser(name: Ziyoviddin),
+    ];
+    listCheckBox = [
+      KvUser(name: AkbarAli),
+      KvUser(name: Avaz),
+      KvUser(name: Davron),
+      KvUser(name: Qobiljon),
+      KvUser(name: Usmonjon),
+      KvUser(name: Diyor),
+      // KvUser(name: Farrux),
+      KvUser(name: Ziyoviddin),
+    ];
+
     payPerson = AkbarAli;
-    listCheckBox.add(AkbarAli);
-    listCheckBox.add(Avaz);
-    listCheckBox.add(Davron);
-    listCheckBox.add(Qobiljon);
-    listCheckBox.add(Usmonjon);
-    listCheckBox.add(Diyor);
-    // listCheckBox.add(Farrux);
-    listCheckBox.add(Ziyoviddin);
+
     on<SelectPayPersonEvent>(pay);
     on<ChangeCheckBoxEvent>(change);
     on<HisoblaEvent>(hisobla);
@@ -327,6 +343,7 @@ class KvBloc extends Bloc<KvEvent, KvState> {
       }
     }
 
+    summaController.text = "";
     emit(SuccesState());
   }
 

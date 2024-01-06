@@ -22,7 +22,17 @@ class KvPage extends StatelessWidget {
     return BlocProvider<KvBloc>(
       create: (ctx) => KvBloc(),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.history,
+                size: Dimens.iconSize24,
+              ),
+            ),
+          ],
+        ),
         body: BlocBuilder<KvBloc, KvState>(
           builder: (ctx, state) {
             bloc = BlocProvider.of<KvBloc>(ctx);
@@ -42,7 +52,7 @@ class KvPage extends StatelessWidget {
           InputWidget(
             title: "title",
             controller: bloc.summaController,
-            mask: Masked.maskInn,
+            mask: Masked.masksumm,
             hint: "hint",
             focusNode: FocusNode(),
             inputType: TextInputType.number,
